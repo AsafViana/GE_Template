@@ -20,7 +20,7 @@
     },
     "android": {
       "package": "com.zaf_tech.gerenciador_de_estoque.empresa",
-      "versionCode": 7,
+      "versionCode": 1,
       "versionName": "1.0.0",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -32,7 +32,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "36015cc9-5d10-44b9-a70d-a26eb2a70d1d"
+        "projectId": "16e900c0-598a-481e-9e4b-2fb2afbc8051"
       }
     }
   }
