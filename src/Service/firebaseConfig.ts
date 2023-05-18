@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { sendPasswordResetEmail, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect, sendEmailVerification } from 'firebase/auth'
+import { sendPasswordResetEmail, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect, sendEmailVerification, signInAnonymously } from 'firebase/auth'
 import { getDatabase, set, ref, onValue, get, child, update, remove } from 'firebase/database'
-import { collection, addDoc, getFirestore, doc, setDoc } from 'firebase/firestore'
+import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,4 +28,4 @@ const database = getDatabase(app)
 const firestore = getFirestore(app)
 const dbRef = ref(database)
 
-export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, provider, signInWithPopup, signInWithRedirect, firestore, collection, addDoc, sendEmailVerification, doc, setDoc, sendPasswordResetEmail, database, ref, set, onValue, dbRef, get, child, update, remove }
+export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, provider, signInWithPopup, signInWithRedirect, firestore, collection, addDoc, sendEmailVerification, doc, setDoc, sendPasswordResetEmail, database, ref, set, onValue, dbRef, get, child, update, remove, signInAnonymously, getDoc }

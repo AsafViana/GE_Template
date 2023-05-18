@@ -50,8 +50,7 @@ const CardOptions = {
 
 const Home = lazy(() => import('../screen/Home'))
 const Adicionar = lazy(() => import('../screen/Adicionar'))
-const Usuario = lazy(() => import('../screen/Usuario'))
-const Testes = lazy(() => import('../screen/Testes'))
+const Info = lazy(() => import('../screen/Info'))
 
 export function LogadoRoutes() {
 	return (
@@ -73,8 +72,7 @@ export function LogadoRoutes() {
 			initialRouteName="Home">
 			<Screen name="Home" component={Home} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'home' }} />
 			<Screen name="Adicionar" component={Adicionar} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'add' }} />
-			<Screen name="Usuario" component={Usuario} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'user' }} />
-			<Screen name="Testes" component={Testes} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'teste' }} />
+			<Screen name="Info" component={Info} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'info' }} />
 		</Navigator>
 	)
 }

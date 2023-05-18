@@ -1,12 +1,11 @@
 import { Center, Text, Input, FormControl, Button, Slide, Alert, ScrollView } from 'native-base'
 import React, { useState, useEffect, useCallback } from 'react'
-import { color } from '../../../env.json'
-import { database, set, ref, auth } from '../../Service/firebaseConfig'
+import { color, Empresa } from '../../../env.json'
+import { database, set, ref } from '../../Service/firebaseConfig'
 import LottieView from 'lottie-react-native'
 
 export default function index(props) {
 	const {} = props
-	const uid = auth.currentUser.uid
 	const [Nome, setNome]: any = useState('')
 	const [Codigo, setCodigo]: any = useState()
 	const [Quantidade, setQuantidade]: any = useState(0)
@@ -24,7 +23,7 @@ export default function index(props) {
 			quantidade: Quantidade,
 			preco: Preco,
 		}
-		set(ref(database, `estoques/${uid}/${Nome}/`), item).then(() => {
+		set(ref(database, `estoques/${Empresa}/${Nome}/`), item).then(() => {
 			setAlertaEstaAberto(!AlertaEstaAberto)
 			setNome(null)
 			setCodigo(null)

@@ -1,8 +1,8 @@
 import { Center, Text, Select, FlatList, CheckIcon } from 'native-base'
 import React, { useState, useCallback, useEffect } from 'react'
-import { color } from '../../../env.json'
+import { color, Empresa } from '../../../env.json'
 import CardItem from '../../component/CardItem'
-import { database, ref, get, child, auth } from '../../Service/firebaseConfig'
+import { database, ref, get, child } from '../../Service/firebaseConfig'
 import { RefreshControl } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 
@@ -23,9 +23,8 @@ export default function index(props) {
 	}, [])
 
 	const pegaDados = useCallback(() => {
-		const uid = auth.currentUser.uid
 		const starCountRef = ref(database)
-		get(child(starCountRef, 'estoques/' + uid)).then((snapshot) => {
+		get(child(starCountRef, 'estoques/' + Empresa)).then((snapshot) => {
 			const data = snapshot.val()
 			const array = []
 

@@ -1,18 +1,17 @@
 import { Center, ScrollView, Text, VStack, Box, Alert, TextArea, HStack, IconButton, Icon, Modal, Button, Input, Slide } from 'native-base'
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Ionicons, FontAwesome5, Entypo, FontAwesome } from '@expo/vector-icons'
-import { color } from '../../../env.json'
+import { color, Empresa } from '../../../env.json'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Item } from './vm'
 import InputNumero from '../../component/InputNumero'
 import InputTexto from '../../component/InputTexto'
-import { set, ref, database, get, child, auth, update, remove } from '../../Service/firebaseConfig'
+import { set, ref, database, get, child, update, remove } from '../../Service/firebaseConfig'
 
 const index = () => {
 	const route = useRoute()
 	const parametros = route.params
 	const navigation = useNavigation()
-	const uid = auth.currentUser.uid
 	const [Valores, setValores] = useState<Item>()
 	const [Nome, setNome] = useState('')
 	const [Codigo, setCodigo] = useState('')
@@ -27,8 +26,7 @@ const index = () => {
 	const scrollViewRef = useRef(null)
 
 	const pegaDados = useCallback(async () => {
-		const uid = auth.currentUser.uid
-		const snapshot = await get(child(ref(database), `estoques/${uid}/${parametros.item}`))
+		const snapshot = await get(child(ref(database), `estoques/${Empresa}/${parametros.item}`))
 		const data = snapshot.val()
 		setValores(data)
 		setCodigo(data?.codigo ?? '')
@@ -51,16 +49,21 @@ const index = () => {
 			}
 
 			if (Valores.nome === Nome) {
-				update(ref(database, `estoques/${uid}/${Nome}`), itemNovo)
+				update(ref(database, `estoques/${Empresa}/${Nome}`), itemNovo)
+				setAlertaEnvioVisivel(true)
+				setAlertaEnvioTipo('confirmado')
+				setTimeout(() => {
+					setAlertaEnvioVisivel(false)
+				}, 5000)
 			} else {
-				remove(ref(database, `estoques/${uid}/${Valores.nome}`)).catch((error) => {
+				remove(ref(database, `estoques/${Empresa}/${Valores.nome}`)).catch((error) => {
 					setAlertaEnvioVisivel(true)
 					setAlertaEnvioTipo('erro')
 					setTimeout(() => {
 						setAlertaEnvioVisivel(false)
 					}, 5000)
 				})
-				set(ref(database, `estoques/${uid}/${Nome}`), itemNovo)
+				set(ref(database, `estoques/${Empresa}/${Nome}`), itemNovo)
 					.then(() => {
 						setAlertaEnvioVisivel(true)
 						setTimeout(() => {
@@ -82,7 +85,7 @@ const index = () => {
 	const handleApagarItem = useCallback(
 		(event) => {
 			event.preventDefault()
-			remove(ref(database, `estoques/${uid}/${Valores.nome}`))
+			remove(ref(database, `estoques/${Empresa}/${Valores.nome}`))
 			navigation.goBack()
 		},
 		[Valores]

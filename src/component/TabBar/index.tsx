@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import env from '../../../env.json'
-import { MaterialIcons, Entypo, Ionicons, FontAwesome } from '@expo/vector-icons'
+import { Feather, Ionicons, FontAwesome } from '@expo/vector-icons'
 import { useKeyboard } from '@react-native-community/hooks'
 
 export function CustomTabBar({ state, descriptors, navigation }) {
@@ -46,8 +46,8 @@ export function CustomTabBar({ state, descriptors, navigation }) {
 							case 'add':
 								icone = <Ionicons color={isFocused ? color.branco : '#535353'} name="add-circle-outline" style={{ marginLeft: 4, marginRight: 1 }} size={45} onPress={onPress} onLongPress={onLongPress} />
 								break
-							case 'user':
-								icone = <FontAwesome name="user" size={40} color={isFocused ? color.branco : '#535353'} style={{ marginHorizontal: 10, marginVertical: 4 }} onPress={onPress} />
+							case 'info':
+								icone = <Feather name="info" size={40} color={isFocused ? color.branco : '#535353'} style={{ marginHorizontal: 5, marginVertical: 4 }} onPress={onPress} />
 								break
 							case 'teste':
 								icone = <Ionicons name="hammer" size={40} color={isFocused ? color.branco : '#535353'} style={{ marginHorizontal: 5, marginVertical: 4 }} onPress={onPress} />

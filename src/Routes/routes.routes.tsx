@@ -1,12 +1,7 @@
 import { TransitionSpecs, createStackNavigator } from '@react-navigation/stack'
-import { useMemo } from 'react'
+import { lazy } from 'react'
 import { StackRoutes } from './stack.routes'
-import { LogadoRoutes } from './logado.routes'
-import { DeslogadoRoutes } from './deslogado.routes'
-import Testes from '../screen/Testes'
-import SplashScreen from '../screen/SplashScreen'
-import DetalhesItem from '../screen/DetalhesItem'
-import {color} from '../../env.json'
+import {LogadoRoutes} from './logado.routes'
 
 const { Screen, Navigator } = createStackNavigator()
 
@@ -54,14 +49,18 @@ export function RoutesRoutes() {
 		gestureEnabled: false,
 	}
 
+	const SplashScreen = lazy(() => import('../screen/SplashScreen'))
+	const DetalhesItem = lazy(() => import('../screen/DetalhesItem'))
+	const Pagina404 = lazy(() => import('../screen/Pagina404'))
+	const Bloqueado = lazy(() => import('../screen/Bloqueado'))
+
 	return (
 		<Navigator initialRouteName="SplashScreen" screenOptions={CardOptions}>
 			<Screen name="SplashScreen" component={SplashScreen} />
-			<Screen name="Stack" component={StackRoutes} />
 			<Screen name="DetalhesItem" component={DetalhesItem} />
+			<Screen name="Pagina404" component={Pagina404} />
+			<Screen name="Bloqueado" component={Bloqueado} />
 			<Screen name="Logado" component={LogadoRoutes} />
-			<Screen name="Deslogado" component={DeslogadoRoutes} />
-			<Screen name="Testes" component={Testes} />
 		</Navigator>
 	)
 }
