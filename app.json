@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "GE",
+    "slug": "GE",
+    "version": "1 .0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "primaryColor": "#001B2C",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#001B2C"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.zaf_tech.gerenciador_de_estoque",
+      "versionCode": 7,
+      "versionName": "1.0.0",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#001B2C"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "36015cc9-5d10-44b9-a70d-a26eb2a70d1d"
+      }
+    }
+  }
+}

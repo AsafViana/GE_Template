@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+	  "jsx": "react",
+	  "module": "esnext"
+},
+  "extends": "expo/tsconfig.base"
+}
