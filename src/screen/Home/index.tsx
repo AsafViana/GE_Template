@@ -9,6 +9,7 @@ import { StatusBar } from 'expo-status-bar'
 interface Resumo {
 	nome: string
 	quantidade: number
+	foto: string
 }
 
 export default function index(props) {
@@ -34,6 +35,7 @@ export default function index(props) {
 					const resumo = {
 						nome: dado.nome,
 						quantidade: dado.quantidade,
+						urlFoto: dado.foto
 					}
 					array.push(resumo)
 				})
@@ -72,7 +74,7 @@ export default function index(props) {
 					Sem conteúdo
 				</Text>
 			)}
-			<FlatList data={Estoque} keyExtractor={(item: Resumo) => item.nome} renderItem={({ item }) => <CardItem nome={item.nome} quantidade={item.quantidade} />} refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />} />
+			<FlatList data={Estoque} keyExtractor={(item: Resumo) => item.nome} renderItem={({ item }) => <CardItem nome={item.nome} quantidade={item.quantidade} urlFoto={item.urlFoto} />} refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />} />
 		</Center>
 	)
 }

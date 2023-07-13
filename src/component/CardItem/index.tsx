@@ -8,8 +8,9 @@ import { getData } from '../../Service/asyncStorage'
 import { useNavigation } from '@react-navigation/native'
 
 export default function index(props) {
-	const { nome, quantidade } = props
+	const { nome, quantidade, urlFoto } = props
 	const navigation = useNavigation()
+	console.log(urlFoto)
 
 	const handlePress = () => {
 		navigation.navigate('DetalhesItem', {item: nome})
@@ -25,14 +26,27 @@ export default function index(props) {
 							{nome}
 						</Text>
 					</VStack>
-					<Box rounded="xs" bg={color.azulMedio} alignSelf="flex-start" mt='3' py="1" px="3">
+					<Box rounded="xs" bg={color.azulMedio} alignSelf="flex-start" mt="3" py="1" px="3">
 						{/* Quantidade */}
 						<Text textTransform="uppercase" fontSize="sm" fontWeight="bold" color={color.branco}>
 							Peças: {quantidade}
 						</Text>
 					</Box>
 				</Box>
-				<FontAwesome5 name="box" color={color.branco} size={64} />
+				{urlFoto ? (
+					<Center size={'lg'} bgColor={color.cinza} rounded={'full'}>
+								<Image
+									source={{
+										uri: urlFoto,
+									}}
+									alt={nome}
+									size={'full'}
+									borderRadius={100}
+								/>
+					</Center>
+				) : (
+					<FontAwesome5 name="box" color={color.branco} size={64} />
+				)}
 			</HStack>
 		</Pressable>
 	)

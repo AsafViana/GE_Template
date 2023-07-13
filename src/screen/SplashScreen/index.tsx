@@ -22,7 +22,8 @@ export default function index(props) {
 							navigation.navigate('Bloqueado')
 						}
 					}else{
-						navigation.navigate('Pagina404')
+						//navigation.navigate('Pagina404')
+						navigation.navigate('Logado')
 					}
 				})
 				.catch((error) => {

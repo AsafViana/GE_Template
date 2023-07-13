@@ -10,7 +10,7 @@ const InputNumero = React.memo(({ value, setValue, simboloEsquerdo }) => {
 		[setValue]
 	)
 
-	return <Input variant={'filled'} backgroundColor={color.azulClaro} borderColor={color.branco} borderRadius={'3xl'} borderWidth={4} fontSize={'3xl'} color={color.branco} onChangeText={handleValueChange} value={value} keyboardType="number-pad" type="text" InputLeftElement={simboloEsquerdo} />
+	return <Input variant={'filled'} backgroundColor={color.azulClaro} borderWidth={'0'} borderColor={color.branco} borderRadius={'3xl'} fontSize={'3xl'} color={color.branco} onChangeText={handleValueChange} value={value} keyboardType="number-pad" type="text" InputLeftElement={simboloEsquerdo} />
 })
 
 export default InputNumero

@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app'
 import { sendPasswordResetEmail, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect, sendEmailVerification, signInAnonymously } from 'firebase/auth'
 import { getDatabase, set, ref, onValue, get, child, update, remove } from 'firebase/database'
 import { collection, addDoc, getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
+import { getStorage, ref as refStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,5 +28,35 @@ const provider = new GoogleAuthProvider()
 const database = getDatabase(app)
 const firestore = getFirestore(app)
 const dbRef = ref(database)
+const storage = getStorage(app)
 
-export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, provider, signInWithPopup, signInWithRedirect, firestore, collection, addDoc, sendEmailVerification, doc, setDoc, sendPasswordResetEmail, database, ref, set, onValue, dbRef, get, child, update, remove, signInAnonymously, getDoc }
+export {
+	auth,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	provider,
+	signInWithPopup,
+	signInWithRedirect,
+	firestore,
+	collection,
+	addDoc,
+	sendEmailVerification,
+	doc,
+	setDoc,
+	sendPasswordResetEmail,
+	database,
+	ref,
+	set,
+	onValue,
+	dbRef,
+	get,
+	child,
+	update,
+	remove,
+	signInAnonymously,
+	getDoc,
+	storage,
+	refStorage,
+	uploadBytes,
+	getDownloadURL
+}
