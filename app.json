@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "GE_empresarial",
-    "slug": "GE_empresarial",
+    "name": "GE_Camarim_La_Belle",
+    "slug": "GE_Camarim_La_Belle",
     "version": "1 .0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "primaryColor": "#201f1d",
+    "primaryColor": "#701825",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#201f1d"
+      "backgroundColor": "#701825"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -24,7 +24,7 @@
       "versionName": "1.0.0",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#201f1d"
+        "backgroundColor": "#701825"
       }
     },
     "web": {

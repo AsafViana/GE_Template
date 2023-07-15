@@ -67,7 +67,7 @@ export default function index(props) {
 								Nome
 							</Text>
 						</FormControl.Label>
-						<Input placeholder="Camisa" autoCapitalize="sentences" textAlign={'center'} fontSize={17} rounded={'2xl'} borderColor={color.branco} borderWidth={3} color={color.branco} value={Nome} onChangeText={setNome} />
+						<Input placeholder="Camisa" autoCapitalize="sentences" textAlign={'center'} fontSize={17} rounded={'2xl'} borderColor={color.branco} borderWidth={2} color={color.branco} value={Nome} onChangeText={setNome} />
 					</FormControl>
 
 					<FormControl m={2}>
@@ -76,21 +76,21 @@ export default function index(props) {
 								Código
 							</Text>
 						</FormControl.Label>
-						<Input textAlign={'center'} placeholder="AB12345678910" fontSize={17} rounded={'2xl'} borderColor={color.branco} autoCapitalize="none" borderWidth={3} color={color.branco} value={Codigo} onChangeText={(val) => handleCodigoChange(val)} />
+						<Input textAlign={'center'} placeholder="AB12345678910" fontSize={17} rounded={'2xl'} borderColor={color.branco} autoCapitalize="none" borderWidth={2} color={color.branco} value={Codigo} onChangeText={(val) => handleCodigoChange(val)} />
 					</FormControl>
 
 					<FormControl m={2}>
 						<Text onPress={() => setQuantidade('')} color={color.branco} bgColor={'blue.200'} fontSize={22} fontWeight={'bold'} ml={4}>
 							Qantidade
 						</Text>
-						<Input placeholder="Peças: 10" textAlign={'center'} inputMode="numeric" keyboardType="number-pad" fontSize={20} rounded={'2xl'} borderColor={color.branco} borderWidth={3} color={color.branco} value={Quantidade} onChangeText={(val) => setQuantidade(parseInt(val))} />
+						<Input placeholder="Peças: 10" textAlign={'center'} inputMode="numeric" keyboardType="number-pad" fontSize={20} rounded={'2xl'} borderColor={color.branco} borderWidth={2} color={color.branco} value={Quantidade} onChangeText={(val) => setQuantidade(parseInt(val))} />
 					</FormControl>
 
 					<FormControl m={2}>
 						<Text color={color.branco} bgColor={'blue.200'} fontSize={22} fontWeight={'bold'} ml={4}>
 							Preço
 						</Text>
-						<Input textAlign={'center'} keyboardType="number-pad" inputMode="numeric" rounded={'2xl'} fontSize={20} borderColor={color.branco} borderWidth={3} color={color.branco} placeholder="R$: 20,00" value={Preco} onChangeText={(val) => setPreco(parseInt(val))} />
+						<Input textAlign={'center'} keyboardType="number-pad" inputMode="numeric" rounded={'2xl'} fontSize={20} borderColor={color.branco} borderWidth={2} color={color.branco} placeholder="R$: 20,00" value={Preco} onChangeText={(val) => setPreco(parseInt(val))} />
 					</FormControl>
 					<Button isLoading={Carregando} isDisabled={!EnviarEstaAtivo} onPress={enviar} m={10} bgColor={color.azulClaro} rounded={'3xl'} w={'100%'} _text={{ fontSize: 22, fontWeight: 'bold' }}>
 						Enviar

@@ -10,7 +10,6 @@ import { useNavigation } from '@react-navigation/native'
 export default function index(props) {
 	const { nome, quantidade, urlFoto } = props
 	const navigation = useNavigation()
-	console.log(urlFoto)
 
 	const handlePress = () => {
 		navigation.navigate('DetalhesItem', {item: nome})
