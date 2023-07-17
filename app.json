@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "GE Camarim La Belle",
+    "name": "GE Teste",
     "slug": "GE_empresarial",
     "version": "1 .0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "primaryColor": "#701825",
+    "primaryColor": "#2b293b",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#701825"
+      "backgroundColor": "#2b293b"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -24,7 +24,7 @@
       "versionName": "1.0.0",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#701825"
+        "backgroundColor": "#2b293b"
       }
     },
     "web": {

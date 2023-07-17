@@ -195,8 +195,8 @@ const index = () => {
 								Preço
 							</Text>
 							<InputNumero
-								value={() => formatarValorEmDinheiro(Number(Preco))}
-								setValue={(info) => setPreco(formatarValorEmDinheiro(info))}
+								value={Preco}
+								setValue={setPreco}
 								simboloEsquerdo={
 									<Text pl={3} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
 										R$
