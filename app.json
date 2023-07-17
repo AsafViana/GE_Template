@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "GE_Camarim_La_Belle",
+    "name": "GE Camarim La Belle",
     "slug": "GE_empresarial",
     "version": "1 .0.0",
     "orientation": "portrait",
@@ -19,7 +19,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.zaf_tech.gerenciador_de_estoque.empresa",
+      "package": "com.zaf_tech.ge_camarim_la_belle",
       "versionCode": 1,
       "versionName": "1.0.0",
       "adaptiveIcon": {

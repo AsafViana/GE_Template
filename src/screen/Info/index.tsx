@@ -36,9 +36,9 @@ export default function index(props) {
 		<Center backgroundColor={color.azulEscuro} flex={1} onLayout={onLayoutRootView}>
 			<StatusBar backgroundColor={color.azulEscuro} />
 
-			<VStack space={5} backgroundColor={color.azulMedio} w={350} h={600} mb={75} px={5} justifyContent={'center'} alignItems={'center'} rounded={'3xl'}>
+			<VStack space={5} backgroundColor={color.azulMedio} w={350} h={450} mb={75} px={5} justifyContent={'center'} alignItems={'center'} rounded={'3xl'}>
 				<Text color={color.corMaisClara} fontSize={'4xl'} fontFamily={'Lemon_Bold'}>
-					Teve algum problema ou questão?
+					Teve algum problema?
 				</Text>
 				<Text fontSize={15} fontFamily={'Lemon_Light'} color={color.branco}>
 					Clique no botão abaixo para entrar em contato

@@ -8,6 +8,7 @@ import InputNumero from '../../component/InputNumero'
 import InputTexto from '../../component/InputTexto'
 import { set, ref, database, get, child, update, remove, storage, refStorage, uploadBytes, getDownloadURL } from '../../Service/firebaseConfig'
 import * as ImagePicker from 'expo-image-picker'
+import { formatarValorEmDinheiro } from '../../Service/tools'
 
 const index = () => {
 	const route = useRoute()
@@ -40,7 +41,8 @@ const index = () => {
 	}, [parametros.item])
 
 	const handleEnviar = useCallback(
-		() => {
+		(event) => {
+			event.preventDefault()
 			const itemNovo: Item = {
 				codigo: Codigo,
 				descricao: Descricao,
@@ -193,8 +195,8 @@ const index = () => {
 								Preço
 							</Text>
 							<InputNumero
-								value={Preco}
-								setValue={setPreco}
+								value={() => formatarValorEmDinheiro(Number(Preco))}
+								setValue={(info) => setPreco(formatarValorEmDinheiro(info))}
 								simboloEsquerdo={
 									<Text pl={3} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
 										R$
@@ -258,11 +260,7 @@ function Deletar({ showModal, setShowModal, deletarFuncao }) {
 								}}>
 								Cancel
 							</Button>
-							<Button
-								colorScheme={'danger'}
-								onPress={() => {
-									setShowModal(false)
-								}}>
+							<Button colorScheme={'danger'} onPress={deletarFuncao}>
 								Deletar
 							</Button>
 						</Button.Group>

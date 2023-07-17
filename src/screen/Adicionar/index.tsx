@@ -81,7 +81,7 @@ export default function index(props) {
 
 					<FormControl m={2}>
 						<Text onPress={() => setQuantidade('')} color={color.branco} bgColor={'blue.200'} fontSize={22} fontWeight={'bold'} ml={4}>
-							Qantidade
+							Quantidade
 						</Text>
 						<Input placeholder="Peças: 10" textAlign={'center'} inputMode="numeric" keyboardType="number-pad" fontSize={20} rounded={'2xl'} borderColor={color.branco} borderWidth={2} color={color.branco} value={Quantidade} onChangeText={(val) => setQuantidade(parseInt(val))} />
 					</FormControl>
