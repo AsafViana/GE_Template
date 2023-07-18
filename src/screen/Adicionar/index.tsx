@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { color, Empresa } from '../../../env.json'
 import { database, set, ref } from '../../Service/firebaseConfig'
 import LottieView from 'lottie-react-native'
+import { formatarValorEmDinheiro } from '../../Service/tools'
 
 export default function index(props) {
 	const {} = props
@@ -40,6 +41,11 @@ export default function index(props) {
 	const handleCodigoChange = useCallback((newText) => {
 		setCodigo(newText.toUpperCase())
 	}, [])
+
+	const handleChangePreco = (text: string) => {
+		const novoValor = formatarValorEmDinheiro(text.replace(/[^0-9]/g, ''))
+		setPreco('R$ '+novoValor)
+	}
 
 	useEffect(() => {
 		if (Nome != null && Codigo != null && Quantidade != null && Preco != null) {
@@ -90,7 +96,7 @@ export default function index(props) {
 						<Text color={color.branco} bgColor={'blue.200'} fontSize={22} fontWeight={'bold'} ml={4}>
 							Preço
 						</Text>
-						<Input textAlign={'center'} keyboardType="number-pad" inputMode="numeric" rounded={'2xl'} fontSize={20} borderColor={color.branco} borderWidth={2} color={color.branco} placeholder="R$: 20,00" value={Preco} onChangeText={(val) => setPreco(parseInt(val))} />
+						<Input textAlign={'center'} keyboardType="number-pad" inputMode="numeric" rounded={'2xl'} fontSize={20} borderColor={color.branco} borderWidth={2} color={color.branco} placeholder="R$: 20,00" value={Preco} onChangeText={handleChangePreco} />
 					</FormControl>
 					<Button isLoading={Carregando} isDisabled={!EnviarEstaAtivo} onPress={enviar} m={10} bgColor={color.azulClaro} rounded={'3xl'} w={'100%'} _text={{ fontSize: 22, fontWeight: 'bold' }}>
 						Enviar

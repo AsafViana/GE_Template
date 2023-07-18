@@ -1,9 +1,9 @@
 interface Item {
     nome: string,
     codigo: string,
-    preco: number,
+    preco: string,
     quantidade: number,
-    foto: string, 
+    foto: string,
     descricao: string,
 }
 

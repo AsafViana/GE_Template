@@ -74,7 +74,7 @@ export function LogadoRoutes() {
 			<Screen name="Home" component={Home} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'home' }} />
 			<Screen name="Adicionar" component={Adicionar} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'add' }} />
 			<Screen name="Info" component={Info} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'info' }} />
-			{/* <Screen name="Testes" component={Testes} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'info' }} /> */}
+			<Screen name="Testes" component={Testes} options={{ tabBarHideOnKeyboard: true, tabBarIcon: 'teste' }} />
 		</Navigator>
 	)
 }

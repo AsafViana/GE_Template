@@ -35,7 +35,7 @@ const index = () => {
 		setCodigo(data?.codigo ?? '')
 		setDescricao(data?.descricao ?? '')
 		setNome(data.nome)
-		setPreco(String(data?.preco ?? ''))
+		setPreco(formatarValorEmDinheiro(String(data?.preco ?? '')))
 		setQuantidade(String(data?.quantidade ?? ''))
 		setFoto(data?.foto ?? '')
 	}, [parametros.item])
@@ -47,7 +47,7 @@ const index = () => {
 				codigo: Codigo,
 				descricao: Descricao,
 				nome: Nome,
-				preco: Number(Preco),
+				preco: Preco,
 				quantidade: Number(Quantidade),
 				foto: Foto,
 			}
@@ -144,6 +144,11 @@ const index = () => {
 		}
 	}, [Foto])
 
+	const handleChangePreco = (text: string) => {
+		const novoValor = formatarValorEmDinheiro(text.replace(/[^0-9]/g, ''))
+		setPreco(novoValor)
+	}
+
 
 	useEffect(() => {
 		pegaDados()
@@ -185,7 +190,7 @@ const index = () => {
 								value={Quantidade}
 								setValue={setQuantidade}
 								simboloEsquerdo={
-									<Text pl={3} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
+									<Text pl={5} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
 										Peças
 									</Text>
 								}
@@ -196,9 +201,9 @@ const index = () => {
 							</Text>
 							<InputNumero
 								value={Preco}
-								setValue={setPreco}
+								setValue={handleChangePreco}
 								simboloEsquerdo={
-									<Text pl={3} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
+									<Text pl={5} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
 										R$
 									</Text>
 								}
@@ -207,7 +212,7 @@ const index = () => {
 							<Text fontSize={'2xl'} fontWeight={'black'} color={color.branco}>
 								Codigo
 							</Text>
-							<InputTexto value={Codigo} setValue={setCodigo} simboloEsquerdo={<Ionicons name="barcode" size={35} color={color.branco} style={{ marginLeft: 5 }} />} />
+							<InputTexto value={Codigo} setValue={setCodigo} simboloEsquerdo={<Ionicons name="barcode" size={35} color={color.branco} style={{ marginLeft: 20 }} />} />
 
 							<Text fontSize={'2xl'} fontWeight={'black'} color={color.branco}>
 								Descrição
