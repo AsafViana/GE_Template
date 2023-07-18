@@ -1,6 +1,5 @@
 import { TransitionSpecs, createStackNavigator } from '@react-navigation/stack'
-import { lazy } from 'react'
-import { StackRoutes } from './stack.routes'
+import React, { lazy } from 'react'
 import { LogadoRoutes } from './logado.routes'
 
 const { Screen, Navigator } = createStackNavigator()

@@ -1,39 +1,37 @@
 {
-  "expo": {
-    "name": "GE Teste",
-    "slug": "GE_empresarial",
-    "version": "1 .0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "primaryColor": "#2b293b",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#2b293b"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "package": "com.zaf_tech.ge_camarim_la_belle",
-      "versionCode": 1,
-      "versionName": "1.0.0",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#2b293b"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "16e900c0-598a-481e-9e4b-2fb2afbc8051"
-      }
-    }
-  }
+	"expo": {
+		"name": "GE Camarim La Belle",
+		"slug": "GE_empresarial",
+		"version": "1 .0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"userInterfaceStyle": "light",
+		"primaryColor": "#701825",
+		"splash": {
+			"image": "./assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#701825"
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"package": "com.zaf_tech.gerenciador_de_estoque.empresa",
+			"versionCode": 1,
+			"versionName": "1.0.0",
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/adaptive-icon.png",
+				"backgroundColor": "#701825"
+			}
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		},
+		"extra": {
+			"eas": {
+				"projectId": "16e900c0-598a-481e-9e4b-2fb2afbc8051"
+			}
+		}
+	}
 }

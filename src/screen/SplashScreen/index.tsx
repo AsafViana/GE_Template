@@ -1,13 +1,11 @@
-import { View } from 'react-native'
-import { useNavigation, CommonActions } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { color, Empresa } from '../../../env.json'
-import { getData } from '../../Service/asyncStorage'
-import { Center, Image } from 'native-base'
+import { Center, Image, Box, Text } from 'native-base'
 import { auth, signInAnonymously, getDoc, doc, firestore } from '../../Service/firebaseConfig'
-import { useEffect, useState } from 'react'
-import React from 'react'
+import React, { useEffect } from 'react'
+import * as SplashScreen from 'expo-splash-screen'
 
-export default function index(props) {
+export default function Splash(props) {
 	const navigation = useNavigation()
 
 	useEffect(() => {
@@ -15,15 +13,17 @@ export default function index(props) {
 			signInAnonymously(auth)
 				.then(async () => {
 					const dados = await getDoc(doc(firestore, 'users', Empresa))
-					if (dados.exists()){
-						if(dados.data().Autorizado){
+					if (dados.exists()) {
+						if (dados.data().Autorizado) {
 							navigation.navigate('Logado')
-						}else{
+							await SplashScreen.hideAsync()
+						} else {
 							navigation.navigate('Bloqueado')
+							await SplashScreen.hideAsync()
 						}
-					}else{
-						//navigation.navigate('Pagina404')
-						navigation.navigate('Logado')
+					} else {
+						navigation.navigate('Pagina404')
+						await SplashScreen.hideAsync()
 					}
 				})
 				.catch((error) => {
@@ -32,12 +32,11 @@ export default function index(props) {
 					console.error(errorMessage)
 				})
 		}
-
-		LoginAnonimo()
+			LoginAnonimo()
 	}, [])
 
 	return (
-		<Center flex={1} bgColor={color.azulEscuro}>
+		<Center flex={1} bg={color.azulEscuro}>
 			<Image source={require('../../../assets/splash.png')} size={500} />
 		</Center>
 	)

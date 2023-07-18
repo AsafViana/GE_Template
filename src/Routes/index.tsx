@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
 import { RoutesRoutes } from './routes.routes'
+import React from 'react'
 
 
 export function Routes() {
