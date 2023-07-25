@@ -3,12 +3,12 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Ionicons, FontAwesome5, Entypo, FontAwesome } from '@expo/vector-icons'
 import { color, Empresa } from '../../../env.json'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { Item } from './vm'
 import InputNumero from '../../component/InputNumero'
 import InputTexto from '../../component/InputTexto'
 import { set, ref, database, get, child, update, remove, storage, refStorage, uploadBytes, getDownloadURL } from '../../Service/firebaseConfig'
 import * as ImagePicker from 'expo-image-picker'
 import { formatarValorEmDinheiro } from '../../Service/tools'
+import { Item } from '../../Service/interfaces'
 
 const index = () => {
 	const route = useRoute()

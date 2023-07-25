@@ -53,7 +53,7 @@ export default function index(props) {
 	return (
 		<Center flex={1} background={color.azulEscuro}>
 			<StatusBar style="light" />
-			<Center>
+			{/* <Center>
 				<Select
 					_selectedItem={{ bgColor: color.azulClaro, rounded: 'lg', _text: { color: color.branco, fontWeight: 'bold', fontSize: 20 }, endIcon: <CheckIcon size="7" />, _icon: { color: color.branco } }}
 					fontWeight={'black'}
@@ -66,7 +66,7 @@ export default function index(props) {
 					onValueChange={(item) => setCategoria(item)}>
 					<Select.Item label="Todos" value="Todos" />
 				</Select>
-			</Center>
+			</Center> */}
 			{TemDados ? (
 				null
 			) : (

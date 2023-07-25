@@ -1,11 +1,9 @@
-import { Center, Text, Box, VStack, Image, HStack, Pressable, Button } from 'native-base'
-import React, { useState, useEffect } from 'react'
-import { Platform } from 'react-native'
-import { Entypo, FontAwesome5, MaterialIcons, AntDesign } from '@expo/vector-icons'
+import { Center, Text, Box, VStack, Image, HStack, Pressable } from 'native-base'
+import React from 'react'
+import { FontAwesome5 } from '@expo/vector-icons'
 import { color } from '../../../env.json'
-import { database, onValue, ref } from '../../Service/firebaseConfig'
-import { getData } from '../../Service/asyncStorage'
 import { useNavigation } from '@react-navigation/native'
+import { quebrarLinha } from '../../Service/tools'
 
 export default function index(props) {
 	const { nome, quantidade, urlFoto } = props
@@ -22,7 +20,7 @@ export default function index(props) {
 					<VStack space="2">
 						{/* Nome */}
 						<Text textTransform="uppercase" color={color.branco} fontWeight={'bold'} fontSize="xl">
-							{nome}
+							{quebrarLinha(nome, 13)}
 						</Text>
 					</VStack>
 					<Box rounded="xs" bg={color.azulMedio} alignSelf="flex-start" mt="3" py="1" px="3">
@@ -34,14 +32,14 @@ export default function index(props) {
 				</Box>
 				{urlFoto ? (
 					<Center size={'lg'} bgColor={color.cinza} rounded={'full'}>
-								<Image
-									source={{
-										uri: urlFoto,
-									}}
-									alt={nome}
-									size={'full'}
-									borderRadius={100}
-								/>
+						<Image
+							source={{
+								uri: urlFoto,
+							}}
+							alt={nome}
+							size={'full'}
+							borderRadius={100}
+						/>
 					</Center>
 				) : (
 					<FontAwesome5 name="box" color={color.branco} size={64} />

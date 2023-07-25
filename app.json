@@ -2,7 +2,8 @@
 	"expo": {
 		"name": "GE Camarim La Belle",
 		"slug": "GE_empresarial",
-		"version": "1 .0.0",
+		"version": "1.0.0",
+		"privacy": "public",
 		"orientation": "portrait",
 		"icon": "./assets/icon.png",
 		"userInterfaceStyle": "light",
@@ -17,9 +18,9 @@
 			"supportsTablet": true
 		},
 		"android": {
-			"package": "com.zaf_tech.gerenciador_de_estoque.empresa",
-			"versionCode": 1,
-			"versionName": "1.0.0",
+			"package": "com.zaf_tech.ge_camarim_la_belle",
+			"permissions": ["CAMERA"],
+			"versionCode": 3,
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptive-icon.png",
 				"backgroundColor": "#701825"
