@@ -1,5 +1,7 @@
-function formatarValorEmDinheiro(valor: string): string {
+function formatarValorEmDinheiro(valorEntrada: string): string {
 	let valorFormatado = ''
+
+	const valor = removerPrefixoR$(valorEntrada)
 
 	if (valor.length === 1) {
 		valorFormatado = `0,0${valor}`
@@ -19,6 +21,30 @@ function formatarValorEmDinheiro(valor: string): string {
 	return valorFormatado
 }
 
+function removerPrefixoR$(valor: string): string {
+	const prefixo = 'R$ '
+	if (valor.startsWith(prefixo)) {
+		return valor.substring(prefixo.length)
+	}
+	return valor
+}
+
+function quebrarLinha(texto: string, caracteresPorLinha: number): string {
+	if (texto.length <= caracteresPorLinha) {
+		return texto
+	}
+
+	let resultado = ''
+	let contador = 0
+
+	while (contador < texto.length) {
+		resultado += texto.substring(contador, contador + caracteresPorLinha) + '\n'
+		contador += caracteresPorLinha
+	}
+
+	return resultado
+}
+
 export {
-	formatarValorEmDinheiro
+	formatarValorEmDinheiro, quebrarLinha
 }

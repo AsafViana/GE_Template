@@ -2,6 +2,7 @@ import { TransitionSpecs, createStackNavigator } from '@react-navigation/stack'
 import React, { lazy } from 'react'
 import { LogadoRoutes } from './logado.routes'
 
+
 const { Screen, Navigator } = createStackNavigator()
 
 export function RoutesRoutes() {
