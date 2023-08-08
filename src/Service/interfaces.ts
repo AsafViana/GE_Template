@@ -5,6 +5,8 @@ interface Item {
     quantidade: number,
     foto: string,
     descricao: string,
+	tipoDeEstoque: string,
+	pacote: number
 }
 
 export {
