@@ -1,7 +1,7 @@
 function formatarValorEmDinheiro(valorEntrada: string): string {
 	let valorFormatado = ''
 
-	const valor = removerPrefixoR$(valorEntrada)
+	const valor = valorEntrada.startsWith('R$') ? removerPrefixoR$(valorEntrada) : valorEntrada
 
 	if (valor.length === 1) {
 		valorFormatado = `0,0${valor}`

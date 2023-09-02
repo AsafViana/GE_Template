@@ -1,11 +1,11 @@
-import { Center, ScrollView, Text, VStack, Box, Alert, TextArea, HStack, IconButton, Icon, Modal, Button, Input, Slide, Pressable, Image, Spinner } from 'native-base'
+import { Center, ScrollView, Text, VStack, Box, Alert, TextArea, HStack, IconButton, Icon, Modal, Button, Input, Slide, Pressable, Image, Spinner, Radio, Stack, FormControl } from 'native-base'
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Ionicons, FontAwesome5, Entypo, FontAwesome } from '@expo/vector-icons'
 import { color, Empresa } from '../../../env.json'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import InputNumero from '../../component/InputNumero'
 import InputTexto from '../../component/InputTexto'
-import { set, ref, database, get, child, update, remove, storage, refStorage, uploadBytes, getDownloadURL } from '../../Service/firebaseConfig'
+import { set, ref, database, get, child, update, remove, storage, refStorage, uploadBytes, getDownloadURL, onValue } from '../../Service/firebaseConfig'
 import * as ImagePicker from 'expo-image-picker'
 import { formatarValorEmDinheiro } from '../../Service/tools'
 import { Item } from '../../Service/interfaces'
@@ -20,24 +20,30 @@ const index = () => {
 	const [Descricao, setDescricao] = useState('')
 	const [Preco, setPreco] = useState('')
 	const [Quantidade, setQuantidade] = useState('')
+	const [Pacote, setPacote] = useState('')
 	const [Foto, setFoto] = useState<any>('')
+	const [TipoDeEstoque, setTipoDeEstoque] = useState('')
 	const [DeleteModalVisible, setDeleteModalVisible] = useState(false)
 	const [NomeModalVisible, setNomeModalVisible] = useState(false)
 	const [AlertaEnvioVisivel, setAlertaEnvioVisivel] = useState(false)
 	const [AlertaEnvioTipo, setAlertaEnvioTipo] = useState('confirmado')
 	const [CarregandoFoto, setCarregandoFoto] = useState(false)
+	const [PrecoPorPeca, setPrecoPorPeca] = useState('0,0')
 	const scrollViewRef = useRef(null)
 
 	const pegaDados = useCallback(async () => {
-		const snapshot = await get(child(ref(database), `estoques/${Empresa}/${parametros.item}`))
-		const data = snapshot.val()
-		setValores(data)
-		setCodigo(data?.codigo ?? '')
-		setDescricao(data?.descricao ?? '')
-		setNome(data.nome)
-		setPreco(formatarValorEmDinheiro(String(data?.preco ?? '')))
-		setQuantidade(String(data?.quantidade ?? ''))
-		setFoto(data?.foto ?? '')
+		onValue(ref(database, `estoques/${Empresa}/${parametros.item}`), (snapshot) => {
+			const data: Item = snapshot.val()
+			setValores(data)
+			setTipoDeEstoque(data?.tipoDeEstoque ?? '')
+			setCodigo(data?.codigo ?? '')
+			setDescricao(data?.descricao ?? '')
+			setNome(data.nome)
+			setPreco(formatarValorEmDinheiro(String(data?.preco ?? '')))
+			setQuantidade(String(data?.quantidade ?? ''))
+			setFoto(data?.foto ?? '')
+			setPacote(String(data?.pacote) ?? '')
+		})
 	}, [parametros.item])
 
 	const handleEnviar = useCallback(
@@ -50,6 +56,8 @@ const index = () => {
 				preco: Preco,
 				quantidade: Number(Quantidade),
 				foto: Foto,
+				tipoDeEstoque: TipoDeEstoque,
+				pacote: parseFloat(PrecoPorPeca)
 			}
 
 			if (Valores.nome === Nome) {
@@ -83,7 +91,7 @@ const index = () => {
 					})
 			}
 		},
-		[Valores, Nome, Codigo, Descricao, Preco, Quantidade, Foto]
+		[Valores, Nome, Codigo, Descricao, Preco, Quantidade, Foto, TipoDeEstoque]
 	)
 
 	const handleApagarItem = useCallback(
@@ -120,20 +128,18 @@ const index = () => {
 
 			const upload = await uploadBytes(referencia, blob)
 				.then(async (obj) => {
-
 					const urlFoto = await getDownloadURL(referencia)
 					const itemNovo: Item = {
 						codigo: Codigo,
 						descricao: Descricao,
 						nome: Nome,
-						preco: Number(Preco),
+						preco: Preco,
 						quantidade: Number(Quantidade),
 						foto: urlFoto,
+						tipoDeEstoque: TipoDeEstoque,
 					}
-					console.log(itemNovo)
 
 					setFoto(urlFoto)
-					handleEnviar()
 					setCarregandoFoto(false)
 				})
 				.catch((error) => {
@@ -149,6 +155,14 @@ const index = () => {
 		setPreco(novoValor)
 	}
 
+	const handlePrecoPorPeca = useCallback(() => {
+		const valor = parseFloat(Preco) / parseInt(Quantidade)
+		setPrecoPorPeca(valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }).replace('R$', '').trim())
+	}, [Preco, Quantidade])
+
+	useEffect(() => {
+		handlePrecoPorPeca()
+	}, [Preco, Quantidade])
 
 	useEffect(() => {
 		pegaDados()
@@ -177,47 +191,105 @@ const index = () => {
 									<FontAwesome5 name="box" color={color.branco} size={70} />
 								)}
 							</Pressable>
-							<Text onPress={() => setNomeModalVisible(true)} mt={5} fontSize={'3xl'} fontWeight={'black'} color={color.branco}>
+							<Text onPress={() => setNomeModalVisible(true)} mt={5} fontSize={'2xl'} fontWeight={'black'} color={color.branco}>
 								{Nome}
 							</Text>
 						</Center>
 
-						<VStack m={10}>
-							<Text fontSize={'2xl'} fontWeight={'black'} color={color.branco}>
-								Quantidade
-							</Text>
-							<InputNumero
-								value={Quantidade}
-								setValue={setQuantidade}
-								simboloEsquerdo={
-									<Text pl={5} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
-										Peças
+						<VStack m={10} space={'2'}>
+							<Center mb={5}>
+								<Radio.Group
+									name="tipoDeEstoque"
+									accessibilityLabel="Tipo de estoque"
+									value={TipoDeEstoque}
+									onChange={(nextValue) => {
+										setTipoDeEstoque(nextValue)
+									}}>
+									<HStack space={7}>
+										<Radio
+											value="unidade"
+											size="lg"
+											my={1}
+											_text={{
+												color: color.branco,
+												fontWeight: 'bold',
+											}}>
+											Unidade
+										</Radio>
+										<Radio
+											value="pacote"
+											size="lg"
+											my={1}
+											_text={{
+												color: color.branco,
+												fontWeight: 'bold',
+											}}>
+											Pacote
+										</Radio>
+									</HStack>
+								</Radio.Group>
+							</Center>
+
+							{/* quantidade */}
+							<FormControl>
+								<Text fontSize={'xl'} fontWeight={'black'} color={color.branco}>
+									Quantidade
+								</Text>
+								<InputNumero
+									value={Quantidade}
+									setValue={(event) => {
+										setQuantidade(event)
+										handlePrecoPorPeca()
+									}}
+									simboloEsquerdo={
+										<Text pl={5} fontSize={'xl'} fontWeight={'bold'} color={color.branco}>
+											Peças
+										</Text>
+									}
+								/>
+								<FormControl.HelperText _text={{ color: color.branco }}>{`Quantidade de ${TipoDeEstoque === 'pacote' ? 'pacotes/caixa' : 'itens'} individuais`}</FormControl.HelperText>
+							</FormControl>
+
+							{/* preço */}
+							<FormControl>
+								<Text fontSize={'xl'} fontWeight={'black'} color={color.branco}>
+									Preço
+								</Text>
+								<InputNumero
+									value={Preco}
+									setValue={handleChangePreco}
+									simboloEsquerdo={
+										<Text pl={5} fontSize={'xl'} fontWeight={'bold'} color={color.branco}>
+											R$
+										</Text>
+									}
+								/>
+							</FormControl>
+							{TipoDeEstoque === 'pacote' ? (
+								<Box>
+									<Text fontWeight={'black'} color={color.branco} fontSize={'md'}>
+										R$ {PrecoPorPeca === '∞' || PrecoPorPeca === 'NaN' ? '0,00' : PrecoPorPeca} / peça
 									</Text>
-								}
-							/>
+								</Box>
+							) : (
+								<></>
+							)}
 
-							<Text fontSize={'2xl'} fontWeight={'black'} color={color.branco}>
-								Preço
-							</Text>
-							<InputNumero
-								value={Preco}
-								setValue={handleChangePreco}
-								simboloEsquerdo={
-									<Text pl={5} fontSize={'2xl'} fontWeight={'bold'} color={color.branco}>
-										R$
-									</Text>
-								}
-							/>
+							{/* codigo */}
+							<Box>
+								<Text fontSize={'xl'} fontWeight={'black'} color={color.branco}>
+									Codigo
+								</Text>
+								<InputTexto value={Codigo} setValue={setCodigo} simboloEsquerdo={<Ionicons name="barcode" size={35} color={color.branco} style={{ marginLeft: 20 }} />} />
+							</Box>
 
-							<Text fontSize={'2xl'} fontWeight={'black'} color={color.branco}>
-								Codigo
-							</Text>
-							<InputTexto value={Codigo} setValue={setCodigo} simboloEsquerdo={<Ionicons name="barcode" size={35} color={color.branco} style={{ marginLeft: 20 }} />} />
-
-							<Text fontSize={'2xl'} fontWeight={'black'} color={color.branco}>
-								Descrição
-							</Text>
-							<TextArea variant={'filled'} backgroundColor={color.azulClaro} borderRadius={'3xl'} borderWidth={'0'} fontSize={'2xl'} color={color.branco} onChangeText={setDescricao} value={Descricao} type="text" autoCompleteType={undefined} h={'64'} p={5} />
+							{/* descrição */}
+							<Box>
+								<Text fontSize={'xl'} fontWeight={'black'} color={color.branco}>
+									Descrição
+								</Text>
+								<TextArea variant={'filled'} backgroundColor={color.azulClaro} borderRadius={'xl'} borderWidth={'0'} fontSize={'xl'} color={color.branco} onChangeText={setDescricao} value={Descricao} type="text" autoCompleteType={undefined} h={'64'} p={3} />
+							</Box>
 						</VStack>
 					</Box>
 				</ScrollView>
@@ -322,8 +394,8 @@ function AlertaEnviou({ AlertaEstaAberto, tipo }) {
 				</Alert>
 			</Slide>
 		)
-	} else if (tipo === 'carregando'){
-		<Slide in={AlertaEstaAberto} placement="top">
+	} else if (tipo === 'carregando') {
+		;<Slide in={AlertaEstaAberto} placement="top">
 			<Alert justifyContent={'center'} status="info" safeAreaTop={0}>
 				<Alert.Icon />
 				<Text alignItems={'center'} textAlign={'center'} mx={5} color={'info.600'} fontWeight={'medium'}>
